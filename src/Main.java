@@ -11,6 +11,7 @@ public class Main {
         for (int i = 1; i <= 5; i++) {
             System.out.printf("Garden");
             System.out.printf("Garden");
+            System.out.printf("Desktop");
             // Press Ctrl+D to start debugging your code. We have set one breakpoint
             // for you, but you can always add more by pressing Cmd+F8.
             System.out.println("i = " + i);
