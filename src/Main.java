@@ -6,13 +6,17 @@ public class Main {
         // IntelliJ IDEA suggests fixing it.
         System.out.printf("Hello and welcome!");
 
+
         // Press Ctrl+R or click the green arrow button in the gutter to run the code.
         for (int i = 1; i <= 5; i++) {
-
+            System.out.printf("Garden");
+            System.out.printf("Garden");
+            System.out.printf("Desktop");
+            System.out.printf("assignment");
             // Press Ctrl+D to start debugging your code. We have set one breakpoint
             // for you, but you can always add more by pressing Cmd+F8.
             System.out.println("i = " + i);
         }
-        System.out.printf("My name is Hyeri");
+        System.out.printf("Hi I'm Hyeri");
     }
 }
