@@ -1,9 +1,10 @@
-package com.likelion14.session.Dto;
+package com.likelion14.session.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 
 @Configuration
 public class SwaggerConfig {
@@ -13,7 +14,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("나만의 API")
-                        .description("학생정보 REST API 문서")
+                        .description("User정보 REST API 문서")
                         .version("1.0.0"));
     }
 }

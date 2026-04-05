@@ -6,9 +6,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class StudentResponseDto {
-    private String name;
-    private String studentNumber;
+public class UserResponseDto {
+    private String userId;
+    private String userPw;
+    private String userName;
     private Integer age;
-    private String major;
+    private String phoneNum;
 }
