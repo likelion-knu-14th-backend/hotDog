@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class TodolistResponseDto {
-    private String todo1, todo2, todo3, day;
+    private String todo1, todo2, todo3, todoNumber;
 }

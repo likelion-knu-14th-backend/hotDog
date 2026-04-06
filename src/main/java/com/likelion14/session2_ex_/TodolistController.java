@@ -18,7 +18,7 @@ public class TodolistController {
                 request.getTodo1(),
                 request.getTodo2(),
                 request.getTodo3(),
-                request.getDay()
+                request.getTodoNumber()
         );
 
         todoList.add(todo);
@@ -30,30 +30,30 @@ public class TodolistController {
         return todoList;
     }
 
-    @GetMapping("/{day}")
-    public TodolistResponseDto getTodo(@PathVariable String day) {
+    @GetMapping("/{todoNumber}")
+    public TodolistResponseDto getTodo(@PathVariable String todoNumber) {
         for (TodolistResponseDto todo : todoList) {
-            if (todo.getDay().equals(day)) {
+            if (todo.getTodoNumber().equals(todoNumber)) {
                 return todo;
             }
         }
         return null;
     }
 
-    @PutMapping("/{day}")
+    @PutMapping("/{todoNumber}")
     public TodolistResponseDto updateTodo(
-            @PathVariable String day,
+            @PathVariable String todoNumber,
             @RequestBody TodolistCreateRequestDto request
     ) {
         for (int i = 0; i < todoList.size(); i++) {
             TodolistResponseDto todo = todoList.get(i);
 
-            if (todo.getDay().equals(day)) {
+            if (todo.getTodoNumber().equals(todoNumber)) {
                 TodolistResponseDto updatedTodo = new TodolistResponseDto(
                         request.getTodo1(),
                         request.getTodo2(),
                         request.getTodo3(),
-                        request.getDay()
+                        request.getTodoNumber()
                 );
 
                 todoList.set(i, updatedTodo);
@@ -64,12 +64,12 @@ public class TodolistController {
         return null;
     }
 
-    @DeleteMapping("/{day}")
-    public void deleteTodo(@PathVariable String day) {
+    @DeleteMapping("/{todoNumber}")
+    public void deleteTodo(@PathVariable String todoNumber) {
         for (int i = 0; i < todoList.size(); i++) {
             TodolistResponseDto todo = todoList.get(i);
 
-            if (todo.getDay().equals(day)) {
+            if (todo.getTodoNumber().equals(todoNumber)) {
                 todoList.remove(i);
             }
         }

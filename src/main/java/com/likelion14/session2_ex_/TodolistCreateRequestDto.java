@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TodolistCreateRequestDto {
 
-    private String todo1, todo2, todo3, day;
+    private String todo1, todo2, todo3, todoNumber;
 }
