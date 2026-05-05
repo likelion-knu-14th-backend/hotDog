@@ -1,17 +1,16 @@
 package com.likelion14.session.controller;
 
 
-import com.likelion14.session.Dto.UserCreateRequestDto;
-import com.likelion14.session.Dto.UserResponseDto;
+import com.likelion14.session.Dto.user.UserCreateRequestDto;
+import com.likelion14.session.Dto.user.UserResponseDto;
 import com.likelion14.session.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;

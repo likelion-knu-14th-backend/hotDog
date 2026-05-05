@@ -1,4 +1,4 @@
-package com.likelion14.session.Dto;
+package com.likelion14.session.Dto.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
