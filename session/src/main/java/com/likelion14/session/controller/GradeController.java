@@ -3,6 +3,7 @@ package com.likelion14.session.controller;
 import com.likelion14.session.Dto.GradeRequestDto;
 import com.likelion14.session.Dto.GradeResponseDto;
 import com.likelion14.session.service.GradeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class GradeController {
     @PostMapping("/{studentNumber}")
     public void uploadStudentGrade(
             @PathVariable String studentNumber,
-            @RequestBody List<GradeRequestDto> gradeRequestDtoList
+            @Valid @RequestBody List<GradeRequestDto> gradeRequestDtoList
     ) {
         gradeService.uploadStudentGrade(studentNumber, gradeRequestDtoList);
     }
