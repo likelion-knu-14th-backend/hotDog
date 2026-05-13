@@ -4,6 +4,7 @@ package com.likelion14.session.controller;
 import com.likelion14.session.Dto.user.UserCreateRequestDto;
 import com.likelion14.session.Dto.user.UserResponseDto;
 import com.likelion14.session.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping //회원가입
-    public UserResponseDto createUser(@RequestBody UserCreateRequestDto userRequest){
+    public UserResponseDto createUser(@RequestBody @Valid UserCreateRequestDto userRequest){
         return userService.createUser(userRequest);
     }
 
@@ -28,7 +29,7 @@ public class UserController {
          return userService.getUser(userId);
     }
     @PutMapping("/{userId}") //회원 Id로 해당 회원정보 전체 수정
-    public UserResponseDto updateUser(@PathVariable String userId,@RequestBody UserCreateRequestDto request){
+    public UserResponseDto updateUser(@PathVariable String userId,@RequestBody @Valid UserCreateRequestDto request){
         return userService.updateUser(userId,request);
 
     }

@@ -5,6 +5,8 @@ import com.likelion14.session.Dto.group.GroupResponseDto;
 import com.likelion14.session.Dto.user.UserResponseDto;
 import com.likelion14.session.entity.TeamGroup;
 import com.likelion14.session.entity.User;
+import com.likelion14.session.exception.ErrorCode;
+import com.likelion14.session.exception.Exception;
 import com.likelion14.session.repository.GroupRepository;
 import com.likelion14.session.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -26,6 +28,7 @@ public class GroupService {
                 .map(GroupResponseDto::new)
                 .toList();
     }
+    @Transactional
     public GroupResponseDto create(GroupRequestDto dto) {
         TeamGroup newTeamGroup = new TeamGroup(
                 dto.getName(),
@@ -52,10 +55,9 @@ public class GroupService {
         TeamGroup teamGroup = getGroupThrow(groupId);
         User user = getUserThrow(userId);
         if(!user.getTeamGroup().getId().equals(groupId)){
-            throw new IllegalArgumentException("해당 그룹 회원이 아닙니다.");
+            throw new Exception(ErrorCode.GROUP_NOT_USER);
         }
         teamGroup.removeUser(user);
-        //userRepository.save(user);
     }
     @Transactional
     public void deleteGroup(Long groupId){
@@ -68,9 +70,9 @@ public class GroupService {
     }
 
     private TeamGroup getGroupThrow(Long groupId){
-        return groupRepository.findById(groupId).orElseThrow(()->new IllegalArgumentException("해당 그룹을 찾을 수 없습니다."));
+        return groupRepository.findById(groupId).orElseThrow(()-> new Exception(ErrorCode.GROUP_NOT_FOUND));
     }
     private User getUserThrow(String userId){
-        return userRepository.findUserByUserId(userId).orElseThrow(() -> new IllegalArgumentException("해당 회원을 찾을 수 없습니다."));
+        return userRepository.findUserByUserId(userId).orElseThrow(()->new Exception(ErrorCode.USER_NOT_FOUND));
     }
 }

@@ -3,18 +3,21 @@ package com.likelion14.session.service;
 import com.likelion14.session.Dto.user.UserCreateRequestDto;
 import com.likelion14.session.Dto.user.UserResponseDto;
 import com.likelion14.session.entity.User;
+import com.likelion14.session.exception.ErrorCode;
+import com.likelion14.session.exception.Exception;
 import com.likelion14.session.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
+    @Transactional //하나의 작업 단위로 묶음
     public UserResponseDto createUser(UserCreateRequestDto dto){
-        //UserGroup userGroup = userGroupRepository.findById(dto.getUserGroup_id()).orElseThrow(()->new IllegalArgumentException("존재하지 않은 그룹"));
         User user = new User(
                 dto.getUserId(),
                 dto.getUserPw(),
@@ -52,7 +55,6 @@ public class UserService {
         userRepository.delete(user);
     }
     private User getUserThrow(String userId){
-        return userRepository.findUserByUserId(userId)
-                .orElseThrow(() ->new IllegalArgumentException("회원을 찾을 수 없습니다."));
+            return userRepository.findUserByUserId(userId).orElseThrow(()->new Exception(ErrorCode.USER_NOT_FOUND));
     }
 }

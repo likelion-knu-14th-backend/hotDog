@@ -4,6 +4,7 @@ import com.likelion14.session.Dto.group.GroupRequestDto;
 import com.likelion14.session.Dto.group.GroupResponseDto;
 import com.likelion14.session.Dto.user.UserResponseDto;
 import com.likelion14.session.service.GroupService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class GroupController {
     public List<GroupResponseDto> getGroups(){return groupService.getGroups();}
 
     @PostMapping
-    public GroupResponseDto createGroup(@RequestBody GroupRequestDto dto){
+    public GroupResponseDto createGroup(@RequestBody @Valid GroupRequestDto dto){
         return groupService.create(dto);
     }
     @PostMapping("/{groupId}/users/{userId}")
