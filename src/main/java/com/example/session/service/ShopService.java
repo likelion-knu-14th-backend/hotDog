@@ -4,6 +4,7 @@ import com.example.session.dto.ShopCreateRequestDto;
 import com.example.session.dto.ShopResponseDto;
 import com.example.session.entity.Product;
 import com.example.session.entity.Shop;
+import com.example.session.exception.ShopNotFoundException;
 import com.example.session.repository.ShopRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -40,15 +41,14 @@ public class ShopService {
 
     public ShopResponseDto getShop(String productNumber) {
         Shop shop = shopRepository.findByProductNumber(productNumber)
-                .orElseThrow(() -> new IllegalArgumentException("해당 상점이 존재하지 않습니다."));
-
+                .orElseThrow(ShopNotFoundException::new);
         return new ShopResponseDto(shop);
     }
 
     @Transactional
     public ShopResponseDto updateShop(String productNumber, ShopCreateRequestDto request) {
         Shop shop = shopRepository.findByProductNumber(productNumber)
-                .orElseThrow(() -> new IllegalArgumentException("해당 상점이 존재하지 않습니다."));
+                .orElseThrow(ShopNotFoundException::new);
 
         shop.update(
                 request.getName(),
@@ -56,13 +56,18 @@ public class ShopService {
                 request.getPrice()
         );
 
+        Product product = new Product();
+        product.setProd(request.getProd());
+        product.setShop(shop);
+        shop.setProduct(product);
+
         Shop updatedShop = shopRepository.save(shop);
         return new ShopResponseDto(updatedShop);
     }
 
     public void deleteShop(String productNumber) {
         Shop shop = shopRepository.findByProductNumber(productNumber)
-                .orElseThrow(() -> new IllegalArgumentException("해당 상점이 존재하지 않습니다."));
+                .orElseThrow(ShopNotFoundException::new);
 
         shopRepository.delete(shop);
     }

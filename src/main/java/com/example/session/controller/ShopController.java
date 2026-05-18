@@ -3,6 +3,7 @@ package com.example.session.controller;
 import com.example.session.dto.ShopCreateRequestDto;
 import com.example.session.dto.ShopResponseDto;
 import com.example.session.service.ShopService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class ShopController {
 
     // 상점 등록
     @PostMapping
-    public ShopResponseDto createShop(@RequestBody ShopCreateRequestDto request) {
+    public ShopResponseDto createShop(@Valid @RequestBody ShopCreateRequestDto request) {
         return shopService.createShop(request);
     }
 
@@ -37,7 +38,7 @@ public class ShopController {
     @PutMapping("/{productNumber}")
     public ShopResponseDto updateShop(
             @PathVariable String productNumber,
-            @RequestBody ShopCreateRequestDto request
+            @Valid @RequestBody ShopCreateRequestDto request
     ) {
         return shopService.updateShop(productNumber, request);
     }
@@ -47,4 +48,5 @@ public class ShopController {
     public void deleteShop(@PathVariable String productNumber) {
         shopService.deleteShop(productNumber);
     }
+
 }
