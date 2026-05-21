@@ -1,5 +1,6 @@
 package com.likelion14.session.entity;
 
+import com.likelion14.session.auth.enums.Role;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -27,6 +28,15 @@ public class Student {
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
     private Profile profile;
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     public Student(String name, String studentNumber, Integer age, String major) {
         this.name = name;
