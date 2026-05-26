@@ -1,6 +1,7 @@
 package com.likelion14.session.entity;
 
 
+import com.likelion14.session.auth.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,13 @@ public class User {
     private Long id;
     @Column(unique = true, nullable = false)
     private String userId;
+    @Column(nullable = false)
     private String userPw;
     private String userName;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     private Integer age;
     @Column(unique = true, nullable = false) //전화번호 중복 막기
     private String phoneNum;
@@ -26,12 +32,13 @@ public class User {
 
 
 
-    public User(String userId, String userPw,String userName, Integer age, String phoneNum) {
+    public User(String userId, String userPw,String userName, Integer age, String phoneNum, Role role) {
         this.userId = userId;
         this.userPw = userPw;
         this.userName = userName;
         this.age = age;
         this.phoneNum = phoneNum;
+        this.role = role;
     }
 
     public void update(String userId, String userPw, String userName, Integer age, String phoneNum) {

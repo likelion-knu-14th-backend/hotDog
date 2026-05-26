@@ -5,11 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Getter
 @NoArgsConstructor
-public class UserCreateRequestDto {
+public class UserSignUpRequestDto {
     @NotBlank(message = "아이디는 필수입니다.")
     private String userId; //User 아이디
     @NotBlank(message = "비밀번호는 필수입니다.")
