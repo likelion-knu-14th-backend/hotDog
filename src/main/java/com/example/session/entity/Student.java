@@ -1,15 +1,14 @@
 package com.example.session.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import com.example.session.auth.enums.Role;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class Student {
 
@@ -26,6 +25,9 @@ public class Student {
 
     private String major;
 
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private Profile profile;
+
     public Student(String name, String studentNumber, Integer age, String major) {
         this.name = name;
         this.studentNumber = studentNumber;
@@ -39,4 +41,13 @@ public class Student {
         this.age = age;
         this.major = major;
     }
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
