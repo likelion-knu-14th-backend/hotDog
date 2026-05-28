@@ -37,6 +37,9 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String provider;
+    private String providerId;
+
 
     public Student(String name, String studentNumber, Integer age, String major) {
         this.name = name;
