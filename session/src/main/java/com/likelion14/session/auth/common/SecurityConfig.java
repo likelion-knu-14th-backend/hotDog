@@ -35,25 +35,18 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 )
-                // 요청별 접근 권한 설정
                 .authorizeHttpRequests(auth -> auth
                         // Swagger 및 회원가입 API는 인증 없이 접근 허용
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
-                                "/api/v1/auth/**"
+                                "/api/v1/auth/**",
+                                "/login-page",
+                                "/kakao-login.png"
                         ).permitAll()
                         // 그 외 요청은 인증 필요
                         .anyRequest().authenticated()
-                )
-                // Spring Security 기본 로그인 방식 비활성화
-                .formLogin(form -> form.disable())
-                .httpBasic(httpBasic -> httpBasic.disable())
-                // UsernamePasswordAuthenticationFilter 전에 JWT Filter 실행
-                .addFilterBefore(
-                        new JwtAuthenticationFilter(jwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class
                 )
                 .build();
     }
