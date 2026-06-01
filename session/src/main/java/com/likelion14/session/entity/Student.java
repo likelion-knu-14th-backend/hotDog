@@ -12,6 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Student {
 
+    private String provider;
+    private String providerId;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
